@@ -9,3 +9,5 @@ Either Paste the script into the browser console, or have it load automatically 
  - Set your wanted altitude range
  - Click the "Set Altitude Range" button
  - Lock the heightmap (check the checkbox next to the lock icon on the right hand side)
+
+Always unlock the heightmap before setting a new range, as otherwise the new range won't be saved and will be reverted as soon as you move the map or otherwise update it.
