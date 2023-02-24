@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SetAltitudeRange
 // @namespace    http://brokenbutler.com/
-// @version      1.0
+// @version      1.0.1
 // @description  A little userscript that allows you to manipulate the maximum and minimum values of the height map on topographic-map.com
 // @author       BrokenButler
 // @match        https://*.topographic-map.com/*
