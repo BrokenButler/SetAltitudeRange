@@ -4,7 +4,7 @@
 // @version      1.0
 // @description  A little userscript that allows you to manipulate the maximum and minimum values of the height map on topographic-map.com
 // @author       BrokenButler
-// @match        https://*.topographic-map.com/
+// @match        https://*.topographic-map.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=topographic-map.com
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/BrokenButler/SetAltitudeRange/main/src/SetAltitudeRange.js
