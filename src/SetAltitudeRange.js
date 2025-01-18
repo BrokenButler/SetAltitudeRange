@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SetAltitudeRange
 // @namespace    http://brokenbutler.com/
-// @version      1.0.1
+// @version      1.1.0
 // @description  A little userscript that allows you to manipulate the maximum and minimum values of the height map on topographic-map.com
 // @author       BrokenButler
 // @match        https://*.topographic-map.com/*
@@ -46,26 +46,20 @@ function addUI(){
 }
 
 function set(){
-    let heightOverlay = document.querySelector("#moduleMap > div > div.leaflet-pane.leaflet-map-pane > div.leaflet-pane.leaflet-overlay-pane > img");
-    let url = new URL(heightOverlay.src);
+    let url = new URL(location.href);
 
     let inputMin = document.querySelector("#inputMin");
     let inputMax = document.querySelector("#inputMax");
 
-    if (inputMin.value != ''){
-        if (url.searchParams.has("minimum")){
-            url.searchParams.set("minimum", inputMin.value);
+    if (inputMin.value != '' || inputMax.value != ''){
+        let lockString = `19,${inputMin.value},${inputMax.value}`;
+        if (url.searchParams.has("lock")){
+            url.searchParams.set("lock", lockString);
         } else {
-            url.searchParams.append("minimum", inputMin.value);
-        }
-    }
-    if (inputMax.value != ''){
-        if (url.searchParams.has("maximum")){
-            url.searchParams.set("maximum", inputMax.value);
-        } else {
-            url.searchParams.append("maximum", inputMax.value);
+            url.searchParams.append("lock", lockString);
         }
     }
 
-    heightOverlay.src = url.href
+    location.href = url.href;
+    //location.reload();
 }
