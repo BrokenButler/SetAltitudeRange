@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SetAltitudeRange
 // @namespace    http://brokenbutler.com/
-// @version      1.1.0
+// @version      1.2.0
 // @description  A little userscript that allows you to manipulate the maximum and minimum values of the height map on topographic-map.com
 // @author       BrokenButler
 // @match        https://*.topographic-map.com/*
@@ -51,15 +51,26 @@ function set(){
     let inputMin = document.querySelector("#inputMin");
     let inputMax = document.querySelector("#inputMax");
 
-    if (inputMin.value != '' || inputMax.value != ''){
-        let lockString = `19,${inputMin.value},${inputMax.value}`;
-        if (url.searchParams.has("lock")){
+    let min = 0;
+    let max = 100000;
+
+    if (!Number.isNaN(inputMax.value)){
+        if (url.searchParams.has("lock")) {
+            let currentLock = url.searchParams.get("lock").split(',');
+            min = currentLock[1] < inputMax.valueAsNumber ? currentLock[1] : min;
+        }
+
+        min = !Number.isNaN(inputMin.value) ? inputMin.valueAsNumber : min;
+        max = inputMax.valueAsNumber > min ? inputMax.valueAsNumber : max;
+
+        if (max < 10000){
+            let lockString = `19,${min},${max}`;
             url.searchParams.set("lock", lockString);
+
+            location.href = url.href;
+            //location.reload();
         } else {
-            url.searchParams.append("lock", lockString);
+            window.alert('max may not be lower than min!\nplease set a lower min or higher max.')
         }
     }
-
-    location.href = url.href;
-    //location.reload();
 }
